@@ -22,8 +22,8 @@ const transporter = nodemailer.createTransport({
   port: 587,
   secure: false, // true للمنفذ 465, false للمنافذ الأخرى مثل 587
   auth: {
-    user: 'your-email@gmail.com', // استبدل بالبريد الإلكتروني الخاص بك
-    pass: 'your-app-password' // استبدل بكلمة مرور التطبيق من Gmail
+    user: 'homos.kitsaway@gmail.com',
+    pass: 'mnmf skua gzfl nmln'
   }
 });
 
@@ -31,8 +31,8 @@ app.post('/send-email', (req, res) => {
   const { userName, userNumber, userEmail, userMessage } = req.body;
 
   const mailOptions = {
-    from: 'your-email@gmail.com', // البريد الإلكتروني للمرسل (يجب أن يكون مطابقًا لـ 'user' في الـ transporter)
-    to: 'recipient-email@gmail.com', // استبدل بالبريد الإلكتروني للمستلم
+    from: 'homos.kitsaway@gmail.com',
+    to: 'm.gamal.zaid1@gmail.com',
     subject: 'بيانات المستخدم',
     text: `الاسم: ${userName}\nالرقم: ${userNumber}\nالبريد الإلكتروني: ${userEmail}\nالتعليقات/الأسئلة: ${userMessage}`
   };
