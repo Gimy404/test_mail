@@ -58,7 +58,7 @@
             var userEmail = document.getElementById('userEmail').value;
             var userMessage = document.getElementById('userMessage').value;
 
-            fetch('https://test-mail.vercel.app/send-email', {
+            fetch('http://localhost:3000/send-email', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
