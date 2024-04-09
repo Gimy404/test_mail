@@ -4,35 +4,32 @@ const cors = require('cors');
 const nodemailer = require('nodemailer');
 
 const app = express();
-const port = process.env.PORT || 3000; // تعديل للسماح بتحديد المنفذ من قبل البيئة السحابية أو استخدام 3000 كافتراضي
+const port = 3000;
 
-// إعدادات CORS للسماح بالطلبات من مواقع مختلفة
-// يمكنك تعديل 'origin' لتقييد الطلبات من مواقع محددة فقط إذا لزم الأمر
-const corsOptions = {
-  origin: '*', // هذا يسمح بجميع الطلبات. لتقييد الطلبات، استبدل '*' بعناوين URL المسموح بها
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type'],
-};
-
-app.use(bodyParser.json());
-app.use(cors(corsOptions)); // استخدام إعدادات CORS
+// إزالة الاستدعاء السابق لـ app.use(cors()) لتجنب تعارض الإعدادات
+// تمكين طلبات CORS لمجال محدد
+app.use(cors({
+  origin: 'https://test-mail-kv8xucvgr-mohamed-gamals-projects-da8ddc00.vercel.app'
+}));
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
   port: 587,
-  secure: false, // true للمنفذ 465, false للمنافذ الأخرى مثل 587
+  secure: false,
   auth: {
-    user: 'homos.kitsaway@gmail.com',
-    pass: 'mnmf skua gzfl nmln'
+    user: 'homos.kitsaway@gmail.com', // تأكد من تغيير هذه البيانات أو استخدام متغيرات البيئة
+    pass: 'mnmf skua gzfl nmln' // تأكد من تغيير هذه البيانات أو استخدام متغيرات البيئة
   }
 });
+
+app.use(bodyParser.json());
 
 app.post('/send-email', (req, res) => {
   const { userName, userNumber, userEmail, userMessage } = req.body;
 
   const mailOptions = {
-    from: 'homos.kitsaway@gmail.com',
-    to: 'm.gamal.zaid1@gmail.com',
+    from: 'homos.kitsaway@gmail.com', // تأكد من تغيير هذا البريد الإلكتروني
+    to: 'm.gamal.zaid1@gmail.com', // تأكد من تغيير هذا البريد الإلكتروني
     subject: 'بيانات المستخدم',
     text: `الاسم: ${userName}\nالرقم: ${userNumber}\nالبريد الإلكتروني: ${userEmail}\nالتعليقات/الأسئلة: ${userMessage}`
   };
